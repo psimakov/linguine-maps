@@ -1,0 +1,457 @@
+<project name="Runme test project" default="build" basedir=".">
+
+	<property name="src" location="src"/>
+	<property name="dist" location="dist"/>
+	<property name="doc" location="doc"/>
+	<property name="bin" location="bin"/>
+	<property name="dot.exe" location="${bin}/graphviz-2.4/bin/dot.exe" />	
+	
+	<taskdef name="ant2gif" classname="com.oy.shared.lm.ant.ANTtoGIFTask" 	classpath="${dist}/lib/oy-lm-1.4.jar"/>	
+	<taskdef name="ojb2gif" classname="com.oy.shared.lm.ant.OJBtoGIFTask" 	classpath="${dist}/lib/oy-lm-1.4.jar"/>	
+	<taskdef name="hbm2gif" classname="com.oy.shared.lm.ant.HBMtoGIFTask" 	classpath="${dist}/lib/oy-lm-1.4.jar"/>	
+	<taskdef name="dtd2gif" classname="com.oy.shared.lm.ant.DTDtoGIFTask" 	classpath="${dist}/lib/oy-lm-1.4.jar"/>	
+	<taskdef name="wsdl2gif" classname="com.oy.shared.lm.ant.WSDLtoGIFTask" classpath="${dist}/lib/oy-lm-1.4.jar"/>		
+		  
+	<target name="init">	
+		<delete dir="${doc}/test"/>
+    	<mkdir dir="${doc}/test"/>
+    	<mkdir dir="${doc}/test/ant"/>
+    	<mkdir dir="${doc}/test/ojb"/>
+    	<mkdir dir="${doc}/test/hbm"/>
+    	<mkdir dir="${doc}/test/dtd"/>     	
+		<mkdir dir="${doc}/test/wsdl"/>     	
+	</target>
+		
+	<target name="antTests" depends="init">		
+		
+		<ant2gif  
+			caption="XML file for launching Catalina 5.0.25 applications using ant."
+			rotated="true"
+			colors="#00AEFF, #FFFFCD, #FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/ant/catalina-5.0.25.xml" 
+			dotFile="${doc}/test/ant/catalina-5.0.25.dot" 
+			outFile="${doc}/test/ant/catalina-5.0.25.png"
+			exeFile="${dot.exe}"
+		/>
+
+
+		<ant2gif  
+			caption="Hibernate 3.0 ANT build script."
+			rotated="true"
+			colors="#00AEFF, #FFFFCD, #FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/ant/hibernate-3.0-build.xml" 
+			dotFile="${doc}/test/ant/hibernate-3.0-build.dot" 
+			outFile="${doc}/test/ant/hibernate-3.0-build.png"
+			exeFile="${dot.exe}"
+		/>	
+
+		<ant2gif 
+			caption="ObJectBridge 1.0.0 ANT build configuration."
+			rotated="true"
+			colors="#00AEFF, #FFFFCD, #FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/ant/db-ojb-1.0.0-build.xml" 
+			dotFile="${doc}/test/ant/db-ojb-1.0.0-build.dot" 
+			outFile="${doc}/test/ant/db-ojb-1.0.0-build.png"
+			exeFile="${dot.exe}"
+		/>
+
+	</target>
+	
+	<target name="ojbTests" depends="init">	
+
+		<ojb2gif 
+			caption="Linguine Maps 1.0 object model."
+			colors="yellow, black, black"
+			inFile="${src}/com/oy/shared/lm/graph/schema/graph.ojb.xml"
+			dotFile="${doc}/test/ojb/ojb-linguine-maps.dot" 
+			outFile="${doc}/test/ojb/ojb-linguine-maps.png"
+			exeFile="${dot.exe}"
+		/>		
+
+		<ojb2gif 
+			caption="ObJectBridge 1.0.0 sample mapping."
+			colors="yellow, black, black"
+			inFile="${src}/com/oy/shared/lm/test/ojb/ojb-test-mapping.xml"
+			dotFile="${doc}/test/ojb/ojb-test-mapping.dot" 
+			outFile="${doc}/test/ojb/ojb-test-mapping.png"
+			exeFile="${dot.exe}"
+		/>		
+		
+		<ojb2gif 
+			caption="ObJectBridge 1.0.0 mapping of classes used in junit tests"
+			colors="yellow, black, black"
+			rotated="true"
+			inFile="${src}/com/oy/shared/lm/test/ojb/repository_junit_odmg.xml"
+			dotFile="${doc}/test/ojb/repository_junit_odmg.dot" 
+			outFile="${doc}/test/ojb/repository_junit_odmg.png"
+			exeFile="${dot.exe}"
+		/>						
+
+
+		<ojb2gif 
+			caption="ObJectBridge 1.0.0 mapping of classes used in sequence manager testing"
+			colors="yellow, black, black"
+			rotated="true"
+			inFile="${src}/com/oy/shared/lm/test/ojb/repository_junit_meta_seq.xml"
+			dotFile="${doc}/test/ojb/repository_junit_meta_seq.dot" 
+			outFile="${doc}/test/ojb/repository_junit_meta_seq.png"
+			exeFile="${dot.exe}"
+		/>					
+		
+		<ojb2gif 
+			caption="ObJectBridge 1.0.0 mapping of classes used in testing references"
+			colors="yellow, black, black"
+			rotated="true"
+			inFile="${src}/com/oy/shared/lm/test/ojb/repository_junit_reference.xml"
+			dotFile="${doc}/test/ojb/repository_junit_reference.dot" 
+			outFile="${doc}/test/ojb/repository_junit_reference.png"
+			exeFile="${dot.exe}"
+		/>									
+
+
+		<ojb2gif 
+			caption="ObJectBridge 1.0.0 mapping of classes used in junit tests and tutorials"
+			colors="yellow, black, black"
+			rotated="true"
+			inFile="${src}/com/oy/shared/lm/test/ojb/repository_junit.xml"
+			dotFile="${doc}/test/ojb/repository_junit.dot" 
+			outFile="${doc}/test/ojb/repository_junit.png"
+			exeFile="${dot.exe}"
+			qualifiedNames="false"
+		/>		
+
+	</target>
+	
+	
+	<target name="hbmTests" depends="init">	
+
+		<hbm2gif  
+			caption="HIBERNATE - Animal &amp; Beings"
+			rotated="true"
+			colors="#FF5937, black, black"
+			dotFile="${doc}/test/hbm/AnimalBeings.dot" 
+			outFile="${doc}/test/hbm/AnimalBeings.png"
+			exeFile="${dot.exe}"
+		>
+			<fileset dir="${src}/com/oy/shared/lm/test/hbm/">
+			  	<include name="Animal.hbm.xml"/>
+				<include name="Beings.hbm.xml"/>
+			</fileset>
+		</hbm2gif>
+		
+		<hbm2gif 
+			caption="HIBERNATE - Relational Persistence for Idiomatic Java (Chapter 24)"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/hbm-test-mapping.xml"
+			dotFile="${doc}/test/hbm/hbm-test-mapping.dot" 
+			outFile="${doc}/test/hbm/hbm-test-mapping.png"
+			exeFile="${dot.exe}"
+		/>		
+		
+		<hbm2gif 
+			caption="HIBERNATE Animals"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/Animal.hbm.xml"
+			dotFile="${doc}/test/hbm/Animal.hbm.dot" 
+			outFile="${doc}/test/hbm/Animal.hbm.png"
+			exeFile="${dot.exe}"
+		/>		
+		
+		<hbm2gif 
+			caption="HIBERNATE Baz"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/Baz.hbm.xml"
+			dotFile="${doc}/test/hbm/Baz.hbm.dot" 
+			outFile="${doc}/test/hbm/Baz.hbm.png"
+			exeFile="${dot.exe}"
+		/>		
+				
+		<hbm2gif 
+			caption="HIBERNATE Beings"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/Beings.hbm.xml"
+			dotFile="${doc}/test/hbm/Beings.hbm.dot" 
+			outFile="${doc}/test/hbm/Beings.hbm.png"
+			exeFile="${dot.exe}"
+		/>	
+		
+		<hbm2gif 
+			caption="HIBERNATE Multi"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/Multi.hbm.xml"
+			dotFile="${doc}/test/hbm/Multi.hbm.dot" 
+			outFile="${doc}/test/hbm/Multi.hbm.png"
+			exeFile="${dot.exe}"
+			qualifiedNames="false"
+		/>				
+		
+		<hbm2gif 
+			caption="HIBERNATE Employment"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/Employment.hbm.xml"
+			dotFile="${doc}/test/hbm/Employment.hbm.dot" 
+			outFile="${doc}/test/hbm/Employment.hbm.png"
+			exeFile="${dot.exe}"
+		/>				
+		
+		<hbm2gif 
+			caption="HIBERNATE FooBar"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/FooBar.hbm.xml"
+			dotFile="${doc}/test/hbm/FooBar.hbm.dot" 
+			outFile="${doc}/test/hbm/FooBar.hbm.png"
+			exeFile="${dot.exe}"
+		/>				
+		
+		<hbm2gif 
+			caption="HIBERNATE ABC"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/ABC.hbm.xml"
+			dotFile="${doc}/test/hbm/ABC.hbm.dot" 
+			outFile="${doc}/test/hbm/ABC.hbm.png"
+			exeFile="${dot.exe}"
+		/>			
+		
+		<hbm2gif 
+			caption="HIBERNATE Container"
+			colors="#FF5937, black, black"
+			inFile="${src}/com/oy/shared/lm/test/hbm/Container.hbm.xml"
+			dotFile="${doc}/test/hbm/Container.hbm.dot" 
+			outFile="${doc}/test/hbm/Container.hbm.png"
+			exeFile="${dot.exe}"
+		/>					
+				
+	</target>
+		
+	<target name="dtdTests" depends="init">	
+		
+		<dtd2gif 
+			caption="Hibernate Mapping DTD 2.0"
+			colors="orange, darkorange, black, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/hibernate-mapping-2.0.dtd"
+			dotFile="${doc}/test/dtd/hibernate-mapping-2.0.dot" 
+			outFile="${doc}/test/dtd/hibernate-mapping-2.0.png"
+			exeFile="${dot.exe}"
+			excludes=" 
+				subclass,joined-subclass,
+				import,discriminator,return,synchronize,timestamp,version,meta-value,parent,
+				cache,jcs-cache,query,sql-query,
+				id,key,key-property,key-many-to-one,composite-id,collection-id,
+				generator,param,
+				index,index-many-to-many,index-many-to-any,composite-index
+			"
+		/>			
+		
+		<dtd2gif 
+			caption="Hibernate Mapping DTD 2.0"
+			colors="orange, darkorange, black, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/hibernate-mapping-2.0.dtd"
+			dotFile="${doc}/test/dtd/xhibernate-mapping-2.0.dot" 
+			outFile="${doc}/test/dtd/xhibernate-mapping-2.0.png"
+			exeFile="${dot.exe}"
+			includes="
+				hibernate-mapping,class,component,bag,list,array,set,map,
+				many-to-many,one-to-many,one-to-many,many-to-one,nested-composite-element,
+				element,composite-element,property
+			"
+		/>			
+		
+		<dtd2gif 
+			caption="Hibernate Mapping DTD 3.0"
+			colors="orange, darkorange, black, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/hibernate-mapping-3.0.dtd"
+			dotFile="${doc}/test/dtd/hibernate-mapping-3.0.dot" 
+			outFile="${doc}/test/dtd/hibernate-mapping-3.0.png"
+			exeFile="${dot.exe}"
+		/>			
+		
+		<dtd2gif 
+			caption="ObJectRelationalBridge 1.0.0 - Bridging Java objects and relational dabatases"
+			colors="orange, darkorange, black, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/ojb-1.0.0-repository.dtd"
+			dotFile="${doc}/test/dtd/ojb-1.0.0-repository.dtd.dot" 
+			outFile="${doc}/test/dtd/ojb-1.0.0-repository.dtd.png"
+			exeFile="${dot.exe}"
+		/>			  
+		
+		<dtd2gif 
+		    caption="DTD Struts Configuration 1.2"
+			colors="limegreen, green, blue, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/struts-config_1_2.dtd"
+			dotFile="${doc}/test/dtd/struts-config_1_2.dot" 
+			outFile="${doc}/test/dtd/struts-config_1_2.png"
+			exeFile="${dot.exe}"
+		/>			
+
+		<dtd2gif 
+		    caption="DTD for the Tile Definition File, Version 1.1"
+			colors="limegreen, green, blue, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/tiles-config_1_1.dtd"
+			dotFile="${doc}/test/dtd/tiles-config_1_1.dot" 
+			outFile="${doc}/test/dtd/tiles-config_1_1.png"
+			exeFile="${dot.exe}"
+		/>	
+		
+		<dtd2gif 
+		    caption="This is the DTD defining the JavaServer Pages 1.2 Tag Library"
+			colors="limegreen, green, blue, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/web-jsptaglibrary_1_2.dtd"
+			dotFile="${doc}/test/dtd/web-jsptaglibrary_1_2.dot" 
+			outFile="${doc}/test/dtd/web-jsptaglibrary_1_2.png"
+			exeFile="${dot.exe}"
+		/>	
+		
+		<dtd2gif 
+		    caption="This is the DTD defining the JavaServer Pages 1.2 Tag Library"
+			colors="limegreen, green, blue, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/ejb-jar_2_0.dtd"
+			dotFile="${doc}/test/dtd/ejb-jar_2_0.dot" 
+			outFile="${doc}/test/dtd/ejb-jar_2_0.png"
+			exeFile="${dot.exe}" 
+		/>			
+		
+		<dtd2gif 
+		    caption="DTD for Apache ANT"
+			colors="limegreen, green, blue, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/ant.dtd"
+			dotFile="${doc}/test/dtd/ant.dot"  
+			outFile="${doc}/test/dtd/ant.png"
+			exeFile="${dot.exe}" 
+		/>				
+		
+		<dtd2gif 
+		    caption="SMIL 1.0"
+			colors="limegreen, green, blue, black"
+			inFile="${src}/com/oy/shared/lm/test/dtd/smil-1.0.dtd"
+			dotFile="${doc}/test/dtd/smil-1.0.dot"  
+			outFile="${doc}/test/dtd/smil-1.0.png"
+			exeFile="${dot.exe}" 
+		/>			
+
+	</target>
+	
+	<target name="wsdlTasks" depends="init">
+
+		<wsdl2gif 
+		    caption="Airport Wether"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/AirportWeather.wsdl"
+			dotFile="${doc}/test/wsdl/AirportWeather.dot"  
+			outFile="${doc}/test/wsdl/AirportWeather.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>					
+				
+		<wsdl2gif 
+		    caption="Time Service"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/TimeService.wsdl"
+			dotFile="${doc}/test/wsdl/TimeService.dot"  
+			outFile="${doc}/test/wsdl/TimeService.png"
+			exeFile="${dot.exe}" 
+			rotated="true"			
+		/>					
+		
+		<wsdl2gif 
+		    caption="Zip Code Resolver"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/ZipCodeResolver.wsdl"
+			dotFile="${doc}/test/wsdl/ZipCodeResolver.dot"  
+			outFile="${doc}/test/wsdl/ZipCodeResolver.png"
+			exeFile="${dot.exe}" 
+			rotated="true"			
+		/>	
+		
+		<wsdl2gif 
+		    caption="CCServices"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/CCServicesImpl.wsdl"
+			dotFile="${doc}/test/wsdl/CCServicesImpl.dot"  
+			outFile="${doc}/test/wsdl/CCServicesImpl.png"
+			exeFile="${dot.exe}" 
+			rotated="true"			
+		/>		
+
+		<wsdl2gif 
+		    caption="Google Search"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/GoogleSearch.wsdl"
+			dotFile="${doc}/test/wsdl/GoogleSearch.dot"  
+			outFile="${doc}/test/wsdl/GoogleSearch.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>
+
+		<wsdl2gif 
+		    caption="Google AdWords Campaign Service"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/AdWordsCampaignService.wsdl"
+			dotFile="${doc}/test/wsdl/AdWordsCampaignService.dot"  
+			outFile="${doc}/test/wsdl/AdWordsCampaignService.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>
+		
+		<wsdl2gif 
+		    caption="XMethodsQuery"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/XMethodsQuery.wsdl"
+			dotFile="${doc}/test/wsdl/XMethodsQuery.dot"  
+			outFile="${doc}/test/wsdl/XMethodsQuery.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>
+	
+		<wsdl2gif 
+		    caption="AXIS 1.2.1 Report Service"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/reportservice.wsdl"
+			dotFile="${doc}/test/wsdl/reportservice.dot"  
+			outFile="${doc}/test/wsdl/reportservice.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>
+
+		<wsdl2gif 
+		    caption="Terra Service"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/TerraService.wsdl"
+			dotFile="${doc}/test/wsdl/TerraService.dot"  
+			outFile="${doc}/test/wsdl/TerraService.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+			detailed="false"
+		/>
+		
+		<wsdl2gif 
+		    caption="Amazon Web Sirvices"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/AmazonWebServices.wsdl"
+			dotFile="${doc}/test/wsdl/AmazonWebServices.dot"  
+			outFile="${doc}/test/wsdl/AmazonWebServices.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>		
+		
+		<wsdl2gif 
+		    caption="Love Is Blind"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/LoveIsBlind.wsdl"
+			dotFile="${doc}/test/wsdl/LoveIsBlind.dot"  
+			outFile="${doc}/test/wsdl/LoveIsBlind.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>			
+		
+		<wsdl2gif 
+		    caption="Good"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/good.wsdl"
+			dotFile="${doc}/test/wsdl/good.dot"  
+			outFile="${doc}/test/wsdl/good.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>
+
+		<wsdl2gif 
+		    caption="SalesRankNPrice"
+			inFile="${src}/com/oy/shared/lm/test/wsdl/SalesRankNPrice.wsdl"
+			dotFile="${doc}/test/wsdl/SalesRankNPrice.dot"  
+			outFile="${doc}/test/wsdl/SalesRankNPrice.png"
+			exeFile="${dot.exe}" 
+			rotated="true"
+		/>
+		
+	</target>
+	
+	<target name="build" depends="antTests,ojbTests,hbmTests,dtdTests,wsdlTasks"/>
+		
+</project>

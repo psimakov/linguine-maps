@@ -1,0 +1,98 @@
+<project name="Runme advanced test project" default="build" basedir=".">
+
+	<property name="src" location="src"/>
+	<property name="dist" location="dist"/>
+	<property name="doc" location="doc"/>
+	
+	<property name="bin" location="bin"/>
+	<property name="dot.exe" location="${bin}/graphviz-2.4/bin/dot.exe" />	
+	
+	<taskdef name="dtd2gif" classname="com.oy.shared.lm.ant.DTDtoGIFTask" classpath="${dist}/lib/oy-lm-1.4.jar"/>	
+		  
+	<macrodef name="url2dtd">
+		<attribute name="url" description="Name of the url that holds DTD"/>
+		<attribute name="fileBase" description="Base for the file name for this DTD"/>
+		<attribute name="label" description="Lable of the DTD"/>
+		<attribute name="rotated" default="false" description="Label of the DTD"/>
+		<attribute name="excludes" default="" description="Excludes"/>
+		<attribute name="includes" default="" description="Includes"/>		
+		<sequential>										
+			<get src="@{url}" dest="${doc}/test/url/dtd/@{fileBase}.dtd" />
+			<dtd2gif 
+			    caption="@{label}" 
+			    rotated="@{rotated}"
+				colors="limegreen, green, blue, black"
+				inFile="${doc}/test/url/dtd/@{fileBase}.dtd"
+				dotFile="${doc}/test/url/dtd/@{fileBase}.dot" 
+				outFile="${doc}/test/url/dtd/@{fileBase}.png"
+				exeFile="${dot.exe}" 
+				excludes="@{excludes}"
+				includes="@{includes}"
+			/>					
+		</sequential>
+	</macrodef>			  
+		  
+	<target name="init">	
+		<delete dir="${doc}/test/url"/>
+    	<mkdir dir="${doc}/test/url"/>	
+    	<mkdir dir="${doc}/test/url/dtd"/>	
+	</target>
+		
+	<target name="dtdTests" depends="init">		
+	
+		<property name="doc" location="doc"/>
+		
+		<!-- http://java.sun.com/dtd/ -->
+		<url2dtd url="http://java.sun.com/dtd/connector_1_0.dtd" fileBase="connector_1_0" label="XML DTD for a Connector 1.0 resource adapter (raa) module"/>
+		<url2dtd url="http://java.sun.com/dtd/jdo_1_0.dtd" fileBase="jdo_1_0" label="XML DTD for the JDO 1.0 Metadata"/>
+		<url2dtd url="http://java.sun.com/dtd/web-facesconfig_1_1.dtd" fileBase="web-facesconfig_1_1" label="XML DTD for the JavaServer Faces 1.1 Application Configuration File"/>
+		<url2dtd url="http://java.sun.com/dtd/web-app_2_3.dtd" fileBase="web-app_2_3" rotated="true" label="XML DTD for a Servlet 2.3 web-app (war) module"/>			
+
+		<!-- http://www.apache.org/ -->				
+		<url2dtd url="http://jakarta.apache.org/commons/dtds/mbeans-descriptors.dtd" fileBase="mbeans-descriptors" label="DTD for the Model MBeans Configuration File"/>			
+		
+		<url2dtd url="http://www.ibatis.com/dtd/sql-map-config-2.dtd" fileBase="ibatis-sql-map-config-2" label="The SQL Map Configuration File"/>					
+		<url2dtd url="http://www.ibatis.com/dtd/dao-2.dtd" fileBase="ibatis-dao-2" label="The DAO Configuration File"/>			
+		
+		<property name="ibatis-subset"  value="
+			iterate, dynamic, include,  
+			isNotNull, isNull,			
+			isNotEmpty, isEmpty,
+			isNotEqual, isEqual, 
+			isLessThan, isNotLessThan, isGreaterThan, isNotGreaterThan,
+			isLessEqual, isNotLessEqual, isGreaterEqual, isNotGreaterEqual,
+			isPropertyAvailable, isNotPropertyAvailable, isParameterPresent, isNotParameterPresent
+		"/>
+		
+		<url2dtd 
+			url="http://www.ibatis.com/dtd/sql-map-2.dtd" 
+			excludes="${ibatis-subset}"
+			fileBase="ibatis-sql-map-2-summary" 
+			label="The SQL Map File (Summary)"
+		/>			
+		<url2dtd 
+			url="http://www.ibatis.com/dtd/sql-map-2.dtd" 
+			includes="${ibatis-subset}"
+			fileBase="ibatis-sql-map-2-detail" 
+			label="The SQL Map File (Statement)"
+		/>			
+		
+	
+
+		<!-- htp://www.w3.org -->	
+		<!--		
+			None of these can be parsed by our parser:
+				- dash-dash comment inside entity
+				- dash dash, O O, or dash O inside entity
+		-->		
+		<!--  
+		<url2dtd url="http://www.w3.org/2001/XMLSchema.dtd" fileBase="XMLSchema" rotated="true" label="DTD for XML Schemas: Part 1: Structures" />
+		<url2dtd url="http://www.w3.org/TR/html4/strict.dtd" fileBase="HTML4Strict" rotated="true" label="HTML 4.01 Strict DTD" />
+		<url2dtd url="http://www.w3.org/TR/html4/loose.dtd" fileBase="HTML4Strict" rotated="true" label="HTML 4.01 Loose DTD" />		
+		-->
+		 
+	</target>
+	
+	<target name="build" depends="dtdTests"/>
+		
+</project>
